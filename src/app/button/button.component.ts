@@ -12,6 +12,7 @@ import { API_URL } from "../app.constants"
 export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterViewInit
   @ViewChild('videoElement', { static: false }) videoElement?: ElementRef<HTMLVideoElement>;
 
+  result: string = '';
   imageCaptured: boolean = false;
   imageBlob: Blob | null = null;
   imageSrc: string | null = null;
@@ -114,6 +115,7 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
     // Upload code goes here
     this.http.post(API_URL + 'capture', this.imageBlob).subscribe((data : any) => {
       console.log(data);
+      this.result = data.text;
     });
   }
 
