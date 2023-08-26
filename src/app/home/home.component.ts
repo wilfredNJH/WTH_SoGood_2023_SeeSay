@@ -56,6 +56,7 @@ export class HomeComponent {
   }
 
   record(){
+    this.result = "";
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {

@@ -1,6 +1,6 @@
 <div class="home">
     <section class="record">
-        <h1>Record</h1>
+        <h1>Record Voice</h1>
         <button (click)="record()">
             Record
         </button>
@@ -13,17 +13,11 @@
         <button (click)="upload()">
             Upload
         </button>
-        <p>
+        <p *ngIf="result==''">
             Status: {{status}}
         </p>
-        <button (click)="test()">
-            Test
-        </button>
+        <p *ngIf="result!=''">
+            {{result}}
+        </p>
     </section>
-    <button (click)="magic()">
-        Test
-    </button>
-    <p>
-        {{result}}
-    </p>
 </div>
