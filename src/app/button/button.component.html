@@ -1,15 +1,11 @@
-<div class="deon">
-  <button (click)="toggleCamera()">{{ showVideo ? 
-    'Turn Off Camera' : 'Turn On Camera' }}</button>
+<section class="photoCapture">
+  <div class="deon">
+    <button class="imageControlButton" (click)="toggleCamera()">{{ showVideo ? 
+      'Turn Off Camera' : 'Turn On Camera' }}</button>
+    <button class="imageControlButton" *ngIf="showVideo" (click)="captureImage()">Capture Image</button>
+    <button class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">Download Image</button>
+  </div>
 
-</div>
-
-<video #videoElement width="300" *ngIf="showVideo" muted></video>
-
-<div class="deon">
-  <button *ngIf="showVideo" (click)="captureImage()">Capture Image</button>
-  <button *ngIf="imageCaptured" (click)="downloadImage()">Download Image</button>
-
-</div>
-
-<img *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
+  <video #videoElement width="300" *ngIf="showVideo" muted></video>
+  <img *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
+</section>

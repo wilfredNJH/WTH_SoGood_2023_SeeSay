@@ -50,6 +50,10 @@ openCamera() {
     return;
   }
 
+  //hack
+  this.imageSrc = null;
+  this.imageCaptured = false;
+
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(stream => {
       this.showVideo = true;

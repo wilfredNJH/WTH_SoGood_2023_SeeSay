@@ -1,3 +1,19 @@
 .deon{
   display: block;
+
+  > .imageControlButton{
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  padding: 1em;
+}
+
+.photoCapture{
+  margin: auto;
+  text-align: center;
+}
+
+button{
+  padding: 1rem;
 }
