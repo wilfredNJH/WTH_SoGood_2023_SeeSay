@@ -6,6 +6,9 @@ __pycache__/
 # for mac 
 **/.DS_Store
 
+# ignoring openai api key 
+constants.py
+
 # C extensions
 *.so
 
