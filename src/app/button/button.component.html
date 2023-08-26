@@ -3,10 +3,10 @@
     <button class="imageControlButton" (click)="toggleCamera()">{{ showVideo ? 
       'Turn Off Camera' : 'Turn On Camera' }}</button>
     <button class="imageControlButton" *ngIf="showVideo" (click)="captureImage()">Capture Image</button>
-    <button class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">Download Image</button>
-    <button class="imageControlButton" *ngIf="imageCaptured" (click)="uploadImage()">Upload Image</button>
+    <button class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">Download</button>
+    <button class="imageControlButton" *ngIf="imageCaptured" (click)="uploadImage()">Upload</button>
   </div>
 
-  <video #videoElement width="300" *ngIf="showVideo" muted></video>
-  <img *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
+  <video #videoElement width="60%" *ngIf="showVideo" muted></video>
+  <img class="capturedImage" *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
 </section>
