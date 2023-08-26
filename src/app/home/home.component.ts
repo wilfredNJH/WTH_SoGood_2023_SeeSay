@@ -16,6 +16,8 @@ export class HomeComponent {
   mediaRecorder: MediaRecorder | undefined;
   audioChunks : any[] = [];
   result: string = "";
+  stream: MediaStream | undefined;
+  blobURL: string = "";
 
   magic(){
     this.http.get('http://localhost:5000/').subscribe(data => {
@@ -25,8 +27,25 @@ export class HomeComponent {
   }
 
   stop(){
+    if (this.mediaRecorder == undefined) return;
+
     this.mediaRecorder?.stop();
     this.status = "stopped";
+
+  }
+
+  upload(){
+    const file = new File(this.audioChunks, 'audio.wav');
+    this.http.post('http://localhost:5000/record', file).subscribe(data => {
+      this.result = (<any>data).text;
+      console.log(this.result);
+    } );
+  }
+
+  test(){
+    this.http.post('http://localhost:5000/test', '').subscribe(data => {
+      console.log(data);
+    });
   }
 
   play(){
@@ -40,6 +59,7 @@ export class HomeComponent {
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {
+        this.stream = stream;
         this.mediaRecorder = new MediaRecorder(stream);
         this.mediaRecorder.start();
         this.status = "recording";
