@@ -7,21 +7,53 @@ import constants
 import openai
 import replicate
 import pyttsx3 
+import cv2
+
+
+cam_port = 0
+cam = cv2.VideoCapture(cam_port)
+  
+cv2.namedWindow("test")
+
+img_counter = 0
+while True:
+    ret, frame = cam.read()
+    if not ret:
+        print("failed to grab frame")
+        break
+    cv2.imshow("test", frame)
+
+    k = cv2.waitKey(1)
+    if k%256 == 27:
+        # ESC pressed
+        print("Escape hit, closing...")
+        break
+    elif k%256 == 32:
+        # SPACE pressed
+        img_name = "captured.png".format(img_counter)
+        cv2.imwrite(img_name, frame)
+        print("{} written!".format(img_name))
+        img_counter += 1
+
+cam.release()
+
+cv2.destroyAllWindows()
 
 # get image
-image_path = os.path.dirname(__file__) +  "\\cat.jfif"
+image_path = os.path.dirname(__file__) +  "/captured.png"
 
 # record speech
 sampling_frequency = 44100
 duration = 10
 recording = sd.rec(int(duration * sampling_frequency),
-                   samplerate=sampling_frequency, channels=2)
+                    samplerate=sampling_frequency,
+                    channels=1)  # Adjust channels as needed (1 or 2)
 print("Starting: Speak now!")
 sd.wait()
 print("finished")
 write("recording0.wav", sampling_frequency, recording)
 
-speech_path = os.path.dirname(__file__) + "\\recording0.wav"
+speech_path = os.path.dirname(__file__) + "/recording0.wav"
 
 # get text from speech 
 openai.api_key = constants.OPENAI_API_KEY
@@ -35,7 +67,7 @@ output = replicate_client.run(
     input={"image": open(image_path, "rb"),
            "prompt": transcript["text"]}
 )
-
+print(output)
 # text to speech
 engine = pyttsx3.init() # object creation
 engine.say(output)
