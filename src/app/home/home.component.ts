@@ -12,15 +12,17 @@ import { catchError, retry } from 'rxjs/operators';
 export class HomeComponent {
   constructor(private http: HttpClient) { }
 
-  magic(){
-    this.http.get('http://localhost:8080/').subscribe(data => {
-      console.log(data);
-    });
-  }
-
   status: string = "stopped";
   mediaRecorder: MediaRecorder | undefined;
   audioChunks : any[] = [];
+  result: string = "";
+
+  magic(){
+    this.http.get('http://localhost:5000/').subscribe(data => {
+      this.result = (<any>data).text;
+      console.log(this.result);
+    });
+  }
 
   stop(){
     this.mediaRecorder?.stop();
