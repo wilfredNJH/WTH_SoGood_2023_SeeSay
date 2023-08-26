@@ -18,7 +18,7 @@ export class HomeComponent {
   result: string = "";
 
   magic(){
-    this.http.get('http://localhost:8080/').subscribe(data => {
+    this.http.get('http://localhost:5000/').subscribe(data => {
       this.result = (<any>data).text;
       console.log(this.result);
     });

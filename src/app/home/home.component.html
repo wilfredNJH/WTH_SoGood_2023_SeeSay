@@ -1,19 +1,25 @@
-<button (click)="record()" class="aButton">
-    Record
-</button>
-<button (click)="stop()" class="aButton">
-    Stop
-</button>
-<button (click)="play()" class="aButton">
-    Play
-</button>
-<p>
-    Status: {{status}}
-</p>
-
-<button (click)="magic()"  class="aButton">
-    Test
-</button>
-<p>
-    {{result}}
-</p>
+<div class="home">
+    <section class="record">
+        <h1>Record</h1>
+        <button (click)="record()">
+            Record
+        </button>
+        <button (click)="stop()">
+            Stop
+        </button>
+        <button (click)="play()">
+            Play
+        </button>
+        <p>
+            Status: {{status}}
+        </p>
+    </section>
+    
+    
+    <button (click)="magic()">
+        Test
+    </button>
+    <p>
+        {{result}}
+    </p>
+</div>

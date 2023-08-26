@@ -1,10 +1,36 @@
-.aButton{
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
+.record{
+    > button{
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+    
+        border-radius: 4px;
+        min-width: 4em;
+    
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+    
+        display: inline-block;
+        margin-right: 1em;
+    }
+    
+    > button:hover{
+        background-color: #3e8e41;
+    }
+
+    background-color: #f2f2f2;
+    width: fit-content;
+    margin: auto;
+    padding: 2em;
+    border-radius: 10%;
+
+    margin-bottom: 1em;
+}
+
+.home{
+    padding: 2em;
+    margin: auto;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin-right: 1em;
+    width: 60%;
 }
