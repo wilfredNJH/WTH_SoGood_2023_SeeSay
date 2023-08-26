@@ -17,4 +17,37 @@ export class HomeComponent {
       console.log(data);
     });
   }
+
+  status: string = "stopped";
+  mediaRecorder: MediaRecorder | undefined;
+  audioChunks : any[] = [];
+
+  stop(){
+    this.mediaRecorder?.stop();
+    this.status = "stopped";
+  }
+
+  play(){
+      const audioBlob = new Blob(this.audioChunks);
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audio.play();
+  }
+
+  record(){
+    navigator.mediaDevices
+      .getUserMedia({ video: false, audio: true })
+      .then((stream) => {
+        this.mediaRecorder = new MediaRecorder(stream);
+        this.mediaRecorder.start();
+        this.status = "recording";
+
+        this.mediaRecorder.addEventListener("dataavailable", event => {
+          this.audioChunks.push(event.data);
+        });
+      })
+      .catch((err) => {
+        console.error(`you got an error: ${err}`);
+      });
+  }
 }
