@@ -16,4 +16,16 @@
 
 button{
   padding: 1rem;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+button:hover{
+  background-color: #dddddd;
+}
+
+img, video{
+  border-radius: 1em;
 }

@@ -4,6 +4,7 @@
       'Turn Off Camera' : 'Turn On Camera' }}</button>
     <button class="imageControlButton" *ngIf="showVideo" (click)="captureImage()">Capture Image</button>
     <button class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">Download Image</button>
+    <button class="imageControlButton" *ngIf="imageCaptured" (click)="uploadImage()">Upload Image</button>
   </div>
 
   <video #videoElement width="300" *ngIf="showVideo" muted></video>
