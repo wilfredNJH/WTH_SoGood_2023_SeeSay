@@ -1,0 +1,15 @@
+<div class="deon">
+  <button (click)="toggleCamera()">{{ showVideo ? 
+    'Turn Off Camera' : 'Turn On Camera' }}</button>
+
+</div>
+
+<video #videoElement width="300" *ngIf="showVideo" muted></video>
+
+<div class="deon">
+  <button *ngIf="showVideo" (click)="captureImage()">Capture Image</button>
+  <button *ngIf="imageCaptured" (click)="downloadImage()">Download Image</button>
+
+</div>
+
+<img *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
