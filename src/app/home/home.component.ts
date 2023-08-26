@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
+import { API_URL } from "../app.constants"
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +22,7 @@ export class HomeComponent {
   blobURL: string = "";
 
   magic(){
-    this.http.get('http://localhost:5000/').subscribe(data => {
+    this.http.get(API_URL).subscribe(data => {
       this.result = (<any>data).text;
       console.log(this.result);
     });
@@ -36,14 +38,14 @@ export class HomeComponent {
 
   upload(){
     const file = new File(this.audioChunks, 'audio.wav');
-    this.http.post('http://localhost:5000/record', file).subscribe(data => {
+    this.http.post(API_URL + 'record', file).subscribe(data => {
       this.result = (<any>data).text;
       console.log(this.result);
     } );
   }
 
   test(){
-    this.http.post('http://localhost:5000/test', '').subscribe(data => {
+    this.http.post(API_URL + 'test', '').subscribe(data => {
       console.log(data);
     });
   }

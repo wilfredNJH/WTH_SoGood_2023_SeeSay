@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { API_URL } from "../app.constants"
+
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
@@ -110,7 +112,7 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
     }
 
     // Upload code goes here
-    this.http.post('http://localhost:5000/capture', this.imageBlob).subscribe((data : any) => {
+    this.http.post(API_URL + 'capture', this.imageBlob).subscribe((data : any) => {
       console.log(data);
     });
   }
