@@ -6,9 +6,9 @@ import wavio as wv
 import constants
 import openai
 import replicate
-import pyttsx3 
 import cv2
-
+from gtts import gTTS
+import webbrowser
 
 cam_port = 0
 cam = cv2.VideoCapture(cam_port)
@@ -58,22 +58,39 @@ speech_path = os.path.dirname(__file__) + "/recording0.wav"
 # get text from speech 
 openai.api_key = constants.OPENAI_API_KEY
 f = open(speech_path, "rb")
-transcript = openai.Audio.transcribe("whisper-1", f, language="en")
+translated = openai.Audio.translate("whisper-1", f)
+print("Translated Prompt:")
+print(translated)
 
 # explain image
 replicate_client = replicate.Client(api_token=constants.REPLICATE_API_KEY)
 output = replicate_client.run(
     "daanelson/minigpt-4:b96a2f33cc8e4b0aa23eacfce731b9c41a7d9466d9ed4e167375587b54db9423",
     input={"image": open(image_path, "rb"),
-           "prompt": transcript["text"]}
+           "prompt": translated["text"]}
 )
+print("Explanation:")
 print(output)
-# text to speech
-engine = pyttsx3.init() # object creation
-engine.say(output)
-engine.runAndWait()
-engine.stop()
-engine.runAndWait()
 
-# print output for debugging
+# translate the reply
+language = 'zh'
+language_dictionary = {
+    "zh": "Chinese",
+    "en": "English",
+    "ms": "Malay",
+    "hi": "Hindi",
+    "pt": "Portuguese"
+}
+if (language != "en"):
+    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Translate the following into " + language_dictionary[language] + " without extraneous words: " + output}])
+    output = completion.choices[0].message.content
+
+print("Translated Explanation:")
 print(output)
+
+# text to speech
+myobj = gTTS(text=output, lang=language, slow=False)
+myobj.save("welcome.mp3")
+
+# play audio
+webbrowser.open("welcome.mp3")
