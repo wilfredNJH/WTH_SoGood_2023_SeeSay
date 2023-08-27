@@ -4,6 +4,15 @@ import { HttpClient } from '@angular/common/http';
 
 import { API_URL } from "../app.constants"
 
+const UploadStates = {
+  UPLOADING: 'uploading',
+  UPLOADED: 'uploaded',
+  NONE: 'none',
+  ERROR: 'error'
+} as const;
+
+type UploadState = typeof UploadStates[keyof typeof UploadStates];
+
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
@@ -13,6 +22,8 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
   @ViewChild('videoElement', { static: false }) videoElement?: ElementRef<HTMLVideoElement>;
 
   result: string = '';
+  uploadState : UploadState = UploadStates.NONE;
+
   imageCaptured: boolean = false;
   imageBlob: Blob | null = null;
   imageSrc: string | null = null;
@@ -113,9 +124,13 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
     }
 
     // Upload code goes here
+    this.uploadState = UploadStates.UPLOADING;
     this.http.post(API_URL + 'capture', this.imageBlob).subscribe((data : any) => {
       console.log(data);
-      this.result = data.text;
+      if (data){
+        this.result = data.text;
+        this.uploadState = UploadStates.UPLOADED;
+      }
     });
   }
 

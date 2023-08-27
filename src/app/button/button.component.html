@@ -10,4 +10,5 @@
   <video #videoElement width="60%" *ngIf="showVideo" muted></video>
   <img class="capturedImage" *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
   <p *ngIf="result!=''">{{result}}</p>
+  <p *ngIf="uploadState=='uploading'">Uploading..</p>
 </section>
