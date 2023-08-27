@@ -2,6 +2,14 @@
   >.imageControlButton {
     width: fit-content;
 
+    /* placeholder */
+    >h1{
+      border: 2px solid black; 
+      border-radius: 8px;
+      padding: 0.5em;
+      border-color: #006eff;
+    }
+
     >img {
       width: var(--button-width);
     }
@@ -14,7 +22,9 @@
 
 .photoCapture {
   margin: auto;
-  width: var(--body-width);
+
+  display: flex;
+  flex-direction: row;
 }
 
 .capturedImage {
@@ -24,4 +34,8 @@
 img,
 video {
   border-radius: 1em;
+}
+
+.videoFeed{
+  float: right;
 }
