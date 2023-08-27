@@ -5,3 +5,14 @@
     --tag-width: 15em;
     --button-hover-scale: 1.075;
 }
+
+@font-face {
+    font-family: 'Gill Sans';
+    src: url('assets/fonts/Gill Sans.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'Gill Sans', sans-serif;  /* Use fallback font like sans-serif in case Gill Sans doesn't load */
+}
+
