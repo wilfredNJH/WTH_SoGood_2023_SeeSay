@@ -30,9 +30,9 @@
             </div>
           </div>
   
-          <button (click)="toggleHistory()">
-              Toggle History
-          </button>
+          <div class="historyButton" (click)="toggleHistory()">
+              <img src="./assets/SeeSay-Button-History_v1.png"/>
+          </div>
           <div *ngIf="showHistory">
               <h3>History</h3>
               <ul>

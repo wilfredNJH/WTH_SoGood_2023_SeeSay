@@ -71,3 +71,7 @@ video {
 .videoFeed, .capturedImage{
   width: 100%
 }
+
+.historyButton{
+  margin-top: 1em;
+}
