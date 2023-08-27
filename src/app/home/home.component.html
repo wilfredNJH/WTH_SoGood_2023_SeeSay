@@ -1,18 +1,21 @@
 <div class="home">
+    <section class="header">
+        <img class="logo" src="./assets/SeeSay-Logo_v1.png"/>
+    </section>
     <section class="record">
-        <h1>Record Voice</h1>
-        <button (click)="record()">
-            Record
-        </button>
-        <button (click)="stop()">
-            Stop
-        </button>
-        <button (click)="play()">
-            Play
-        </button>
-        <button (click)="upload()">
-            Upload
-        </button>
+        <img class="tag" src="./assets/SeeSay-Tag-AudioFeature_v1.png"/>
+        <div class="record-button" (click)="record()">
+            <img class="button-img" src="./assets/SeeSay-Button-Record_v1.png"/>
+        </div>
+        <div class="record-button" (click)="stop()">
+            <img class="button-img" src="./assets/SeeSay-Button-Stop_v1.png"/>
+        </div>
+        <div class="record-button" (click)="play()">
+            <img class="button-img" src="./assets/SeeSay-Button-Play_v1.png"/>
+        </div>
+        <div class="record-button" (click)="upload()">
+            <img class="button-img" src="./assets/SeeSay-Button-Upload_v1.png"/>
+        </div>
         <p *ngIf="result==''">
             Status: {{status}}
         </p>

@@ -1,38 +1,36 @@
 .record{
-    color: white;
-    background-color: #333333;
-    width: fit-content;
-    margin: auto;
-    padding: 2em;
+    color: black;
     border-radius: 80px;
 
+    margin-top: 3em;
     margin-bottom: 1em;
 
-    > button{
-        background-color: #777777;
-        border: none;
-        color: white;
-    
-        border-radius: 4px;
-        min-width: 5rem;
-    
-        padding: 0.75rem 1rem;
-        text-align: center;
-        text-decoration: none;
-    
-        display: inline-block;
-        margin-right: 1em;
-        margin-bottom: 1em;
+    > .tag{
+        width: 15em;
+    }
+
+    > .record-button{
+        width: fit-content;
+        margin-bottom: 0.75em;
+
+        > .button-img{
+            width: 13.5em;
+        }
     }
     
-    > button:hover{
-        background-color: #aaaaaa;
+    >  .record-button:hover{
+        scale: 1.05;
     }
 }
 
 .home{
     padding: 2em;
-    margin: auto;
-    text-align: center;
     width: 80%;
+    margin: auto;
+
+}
+
+.logo{
+    width: 26em;
+    margin-top: 4em;
 }
