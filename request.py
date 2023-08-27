@@ -9,6 +9,7 @@ import replicate
 import cv2
 from gtts import gTTS
 import webbrowser
+import subprocess
 
 cam_port = 0
 cam = cv2.VideoCapture(cam_port)
@@ -45,9 +46,14 @@ image_path = os.path.dirname(__file__) +  "/captured.png"
 # record speech
 sampling_frequency = 44100
 duration = 10
-recording = sd.rec(int(duration * sampling_frequency),
-                    samplerate=sampling_frequency,
-                    channels=1)  # Adjust channels as needed (1 or 2)
+try:
+    recording = sd.rec(int(duration * sampling_frequency),
+                       samplerate=sampling_frequency,
+                       channels=1)  # Adjust channels as needed (1 or 2)
+    sd.wait()  # Wait for the recording to complete
+except sd.PortAudioError as e:
+    print("PortAudioError:", e)
+
 print("Starting: Speak now!")
 sd.wait()
 print("finished")
@@ -73,7 +79,7 @@ print("Explanation:")
 print(output)
 
 # translate the reply
-language = 'zh'
+language = 'en'
 language_dictionary = {
     "zh": "Chinese",
     "en": "English",
@@ -93,4 +99,5 @@ myobj = gTTS(text=output, lang=language, slow=False)
 myobj.save("welcome.mp3")
 
 # play audio
-webbrowser.open("welcome.mp3")
+return_code = subprocess.call(["afplay", "welcome.mp3"])
+# webbrowser.open("welcome.mp3")
