@@ -19,6 +19,14 @@ export class HomeComponent {
   audioChunks : any[] = [];
   result: string = "";
   stream: MediaStream | undefined;
+  blobURL: string = "";
+  resultHistory : string[] = [];
+
+  showHistory: boolean = false;
+
+  toggleHistory() {
+    this.showHistory = !this.showHistory;
+  }
 
   magic(){
     this.http.get(API_URL).subscribe(data => {
@@ -34,14 +42,20 @@ export class HomeComponent {
     this.status = "stopped";
 
   }
+ 
 
-  upload(){
+  upload() {
     const file = new File(this.audioChunks, 'audio.wav');
     this.http.post(API_URL + 'record', file).subscribe(data => {
       this.result = (<any>data).text;
       console.log(this.result);
-    } );
+  
+      if (this.resultHistory.length === 0 || this.resultHistory[this.resultHistory.length - 1] !== this.result) {
+        this.resultHistory.push(this.result);
+      }
+    });
   }
+  
 
   test(){
     this.http.post(API_URL + 'test', '').subscribe(data => {
@@ -57,6 +71,7 @@ export class HomeComponent {
   }
 
   record(){
+    this.audioChunks = [];
     this.result = "";
     this.audioChunks = [];
 
