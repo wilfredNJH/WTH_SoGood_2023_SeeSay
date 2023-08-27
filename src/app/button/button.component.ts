@@ -203,9 +203,12 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
       if (data){
         this.captureResult = data.text;
         this.uploadState = UploadStates.UPLOADED;
+        
 
+        let select : any = document.getElementById('language-select')
+        
         //get tts
-        this.http.post(API_URL + 'texttospeech', 'en').subscribe(data => {
+        this.http.post(API_URL + 'texttospeech', select.value).subscribe(data => {
           this.http.get(API_URL + 'speak', { responseType: 'blob' }).subscribe(audioBlob  => {
             const audio = new Audio(URL.createObjectURL(audioBlob));
             audio.play();
