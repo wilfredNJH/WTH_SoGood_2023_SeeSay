@@ -10,16 +10,24 @@
     }
 
     > .record-button{
-        width: fit-content;
+        width: fit-content;     
+        height: fit-content;
         margin-bottom: 0.75em;
 
         > .button-img{
+            /* hax */
+            margin-top: 2.5px;
             width: var(--button-width);
         }
     }
     
     >  .record-button:hover{
         scale: var(--button-hover-scale);
+    }
+
+    > .record-button:active{
+        background-color: lightblue;
+        border-radius: 20px;
     }
 }
 
