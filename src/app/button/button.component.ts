@@ -203,6 +203,16 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
       if (data){
         this.captureResult = data.text;
         this.uploadState = UploadStates.UPLOADED;
+
+        //get tts
+        this.http.post(API_URL + 'texttospeech', 'en').subscribe(data => {
+          this.http.get(API_URL + 'speak', { responseType: 'blob' }).subscribe(audioBlob  => {
+            const audio = new Audio(URL.createObjectURL(audioBlob));
+            audio.play();
+          }
+          );
+          console.log(data);
+        });
       }
     });
   }
