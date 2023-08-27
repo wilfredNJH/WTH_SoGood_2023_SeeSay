@@ -19,7 +19,6 @@ export class HomeComponent {
   audioChunks : any[] = [];
   result: string = "";
   stream: MediaStream | undefined;
-  blobURL: string = "";
 
   magic(){
     this.http.get(API_URL).subscribe(data => {
@@ -59,6 +58,8 @@ export class HomeComponent {
 
   record(){
     this.result = "";
+    this.audioChunks = [];
+
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {
