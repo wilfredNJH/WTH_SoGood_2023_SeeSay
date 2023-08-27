@@ -16,11 +16,19 @@
         <div class="record-button" (click)="upload()">
             <img class="button-img" src="./assets/SeeSay-Button-Upload_v1.png"/>
         </div>
-        <p *ngIf="result==''">
-            Status: {{status}}
-        </p>
-        <p *ngIf="result!=''">
-            Transcript: {{result}}
-        </p>
+
+        <button (click)="toggleHistory()">
+            Toggle History
+        </button>
+        <div *ngIf="showHistory">
+            <h3>History</h3>
+            <ul>
+              <li *ngFor="let result of resultHistory">{{ result }}</li>
+            </ul>
+        </div>
+
+        <p>
+            {{ result ? result : 'Status: ' + status }}
+        
     </section>
 </div>
