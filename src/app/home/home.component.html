@@ -19,9 +19,10 @@
                     <img class="button-img" src="./assets/SeeSay-Button-Upload_v1.png"/>
                 </div>
         
-                <button (click)="toggleHistory()">
-                    Toggle History
-                </button>
+                <div class="toggleHistory-button"(click)="toggleHistory()">
+                    <img class="button-img" src="./assets/SeeSay-Button-History_v1.png"/>
+                </div>
+
                 <div *ngIf="showHistory">
                     <h3>History</h3>
                     <ul>
@@ -29,8 +30,10 @@
                     </ul>
                 </div>
         
-                <p>
+                <p class="result-status">
                     {{ result ? result : 'Status: ' + status }}
+                </p>
+
                 
             </section>
         

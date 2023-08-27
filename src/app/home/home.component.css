@@ -51,3 +51,7 @@
 .videoFeed{
     margin-left: auto;
 }
+.result-status {
+    font-size: 24px; 
+    font-weight: bold; 
+}
