@@ -1,25 +1,59 @@
-<section class="photoCapture">
-  <div class="deon">
-    <div class="imageControlButton" (click)="toggleCamera()">
-      <img class="button-img" src="./assets/SeeSay-Button-Camera_v1.png"/>
-    </div>
-    <div class="imageControlButton" *ngIf="showVideo" (click)="captureImage()">
-      <h1>Capture Image</h1>
-    </div>
-    <div class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">
-      <h1>Download</h1>
-    </div>
-    <div class="imageControlButton" *ngIf="imageCaptured" (click)="uploadImage()">
-      <h1>Upload</h1>
-    </div>
+<div class="body">
+  <div class="controls">
+      <section class="record">
+          <img class="tag" src="./assets/SeeSay-Tag-AudioFeature_v1.png"/>
+          <div class="record-button" (click)="record()">
+              <img class="button-img" src="./assets/SeeSay-Button-Record_v1.png"/>
+          </div>
+          <div class="record-button" (click)="stop()">
+              <img class="button-img" src="./assets/SeeSay-Button-Stop_v1.png"/>
+          </div>
+          <div class="record-button" (click)="play()">
+              <img class="button-img" src="./assets/SeeSay-Button-Play_v1.png"/>
+          </div>
+          <div class="record-button" (click)="upload()">
+              <img class="button-img" src="./assets/SeeSay-Button-Upload_v1.png"/>
+          </div>
+
+          <div class="deon">
+            <div class="imageControlButton" (click)="toggleCamera()">
+              <img class="button-img" src="./assets/SeeSay-Button-Camera_v1.png"/>
+            </div>
+            <div class="imageControlButton" *ngIf="showVideo" (click)="captureImage()">
+              <h1>Capture Image</h1>
+            </div>
+            <div class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">
+              <h1>Download</h1>
+            </div>
+            <div class="imageControlButton" *ngIf="imageCaptured" (click)="uploadImage()">
+              <h1>Upload</h1>
+            </div>
+          </div>
+  
+          <button (click)="toggleHistory()">
+              Toggle History
+          </button>
+          <div *ngIf="showHistory">
+              <h3>History</h3>
+              <ul>
+                <li *ngFor="let result of resultHistory">{{ result }}</li>
+              </ul>
+          </div>
+  
+          <p>
+              {{ recordResult ? recordResult : 'Status: ' + status }}
+          
+      </section>
   </div>
 
-  <video class="videoFeed" #videoElement width="60%" *ngIf="showVideo" muted></video>
-  <img class="capturedImage" *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
-  <p *ngIf="result!=''">{{result}}</p>
-  <p *ngIf="uploadState=='uploading'">Uploading..</p>
-</section>
-<!-- 
-<ng-template #video_placeholder>
-  <img src="./assets/SeeSay-SideArt_v1.png"/>
-</ng-template> -->
+  <section class="photoCapture">  
+    <div>
+      <video class="videoFeed" #videoElement *ngIf="showVideo" muted></video>
+      <img class="capturedImage" *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" /> 
+      <img class="videoFeed" *ngIf="!(showVideo || imageSrc)" src="./assets/SeeSay-SideArt_v1.png"/> 
+      <p *ngIf="captureResult!=''">{{captureResult}}</p>
+      <p *ngIf="uploadState=='uploading'">Uploading..</p>
+    </div>
+  
+  </section>
+</div> 

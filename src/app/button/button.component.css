@@ -1,3 +1,42 @@
+.record{
+  color: black;
+  border-radius: 80px;
+
+  margin-top: 3em;
+  margin-bottom: 1em;
+
+  > .tag{
+      width: var(--tag-width);
+  }
+
+  > .record-button{
+      width: fit-content;     
+      height: fit-content;
+      margin-bottom: 0.75em;
+
+      > .button-img{
+          /* hax */
+          margin-top: 2.5px;
+          width: var(--button-width);
+      }
+  }
+  
+  >  .record-button:hover{
+      scale: var(--button-hover-scale);
+  }
+
+  > .record-button:active{
+      background-color: lightblue;
+      border-radius: 20px;
+  }
+}
+
+.body{
+  display: flex;
+  flex-direction: row;
+}
+
+
 .deon {
   >.imageControlButton {
     width: fit-content;
@@ -21,14 +60,7 @@
 }
 
 .photoCapture {
-  margin: auto;
-
-  display: flex;
-  flex-direction: row;
-}
-
-.capturedImage {
-  width: 60%;
+  margin-left: auto;
 }
 
 img,
@@ -36,6 +68,6 @@ video {
   border-radius: 1em;
 }
 
-.videoFeed{
-  float: right;
+.videoFeed, .capturedImage{
+  width: 100%
 }

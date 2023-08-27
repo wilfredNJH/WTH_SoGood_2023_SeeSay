@@ -21,15 +21,88 @@ type UploadState = typeof UploadStates[keyof typeof UploadStates];
 export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterViewInit
   @ViewChild('videoElement', { static: false }) videoElement?: ElementRef<HTMLVideoElement>;
 
-  result: string = '';
+  recordResult: string = '';
   uploadState : UploadState = UploadStates.NONE;
 
   imageCaptured: boolean = false;
   imageBlob: Blob | null = null;
   imageSrc: string | null = null;
   showVideo: boolean = false;
-  stream: MediaStream | null = null;
+  audioStream: MediaStream | null = null;
   shouldPlayVideo: boolean = false;  // <-- Flag to check if video should play
+
+  
+  status: string = "stopped";
+  mediaRecorder: MediaRecorder | undefined;
+  audioChunks : any[] = [];
+  captureResult: string = "";
+  videoStream: MediaStream | undefined;
+  blobURL: string = "";
+  resultHistory : string[] = [];
+
+  showHistory: boolean = false;
+
+  toggleHistory() {
+    this.showHistory = !this.showHistory;
+  }
+
+  stop(){
+    if (this.mediaRecorder == undefined) return;
+
+    this.mediaRecorder?.stop();
+    this.status = "stopped";
+
+  }
+ 
+
+  upload() {
+    this.recordResult = "Uploading.."; //hack
+    const file = new File(this.audioChunks, 'audio.wav');
+    this.http.post(API_URL + 'record', file).subscribe(data => {
+      this.recordResult = "Transcript: " + (<any>data).text;
+      console.log(this.recordResult);
+  
+      if (this.resultHistory.length === 0 || this.resultHistory[this.resultHistory.length - 1] !== this.recordResult) {
+        this.resultHistory.push(this.recordResult);
+      }
+    });
+  }
+  
+
+  test(){
+    this.http.post(API_URL + 'test', '').subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  play(){
+      const audioBlob = new Blob(this.audioChunks);
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audio.play();
+  }
+
+  record(){
+    this.audioChunks = [];
+    this.recordResult = "";
+    this.audioChunks = [];
+
+    navigator.mediaDevices
+      .getUserMedia({ video: false, audio: true })
+      .then((stream) => {
+        this.audioStream = stream;
+        this.mediaRecorder = new MediaRecorder(stream);
+        this.mediaRecorder.start();
+        this.status = "recording";
+
+        this.mediaRecorder.addEventListener("dataavailable", event => {
+          this.audioChunks.push(event.data);
+        });
+      })
+      .catch((err) => {
+        console.error(`you got an error: ${err}`);
+      });
+  }
 
   constructor(private cdRef: ChangeDetectorRef, private http : HttpClient) { }
 
@@ -46,10 +119,10 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
   }
 
   playVideoIfNeeded() {
-    if (this.shouldPlayVideo && this.stream) {
+    if (this.shouldPlayVideo && this.videoStream) {
       const videoElem = this.videoElement?.nativeElement;
       if (videoElem) {
-        videoElem.srcObject = this.stream;
+        videoElem.srcObject = this.videoStream;
         videoElem.play();
       }
     }
@@ -72,7 +145,7 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(stream => {
         this.showVideo = true;
-        this.stream = stream;
+        this.videoStream = stream;
         this.cdRef.detectChanges(); // Force an update to render the video element.
         this.shouldPlayVideo = true;
         this.playVideoIfNeeded();
@@ -84,7 +157,7 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
 
 
   captureImage() {
-    if (!this.stream) {
+    if (!this.videoStream) {
       console.error('No video stream available');
       return;
     }
@@ -128,16 +201,16 @@ export class ButtonComponent implements AfterViewInit {  // <-- Implement AfterV
     this.http.post(API_URL + 'capture', this.imageBlob).subscribe((data : any) => {
       console.log(data);
       if (data){
-        this.result = data.text;
+        this.captureResult = data.text;
         this.uploadState = UploadStates.UPLOADED;
       }
     });
   }
 
   closeCamera() {
-    if (this.stream) {
-      this.stream.getTracks().forEach(track => track.stop());
-      this.stream = null;
+    if (this.videoStream) {
+      this.videoStream.getTracks().forEach(track => track.stop());
+      this.videoStream = undefined;
       this.showVideo = false;
     }
   }
