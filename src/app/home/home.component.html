@@ -13,11 +13,20 @@
         <button (click)="upload()">
             Upload
         </button>
-        <p *ngIf="result==''">
-            Status: {{status}}
+
+        <button (click)="toggleHistory()">
+            Toggle History
+        </button>
+        <div *ngIf="showHistory">
+            <h3>History</h3>
+            <ul>
+              <li *ngFor="let result of resultHistory">{{ result }}</li>
+            </ul>
+        </div>
+
+        <p>
+            {{ result ? result : 'Status: ' + status }}
         </p>
-        <p *ngIf="result!=''">
-            {{result}}
-        </p>
+        
     </section>
 </div>
