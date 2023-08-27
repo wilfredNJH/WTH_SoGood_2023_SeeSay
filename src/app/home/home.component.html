@@ -2,36 +2,41 @@
     <section class="header">
         <img class="logo" src="./assets/SeeSay-Logo_v1.png"/>
     </section>
-    <section class="record">
-        <img class="tag" src="./assets/SeeSay-Tag-AudioFeature_v1.png"/>
-        <div class="record-button" (click)="record()">
-            <img class="button-img" src="./assets/SeeSay-Button-Record_v1.png"/>
-        </div>
-        <div class="record-button" (click)="stop()">
-            <img class="button-img" src="./assets/SeeSay-Button-Stop_v1.png"/>
-        </div>
-        <div class="record-button" (click)="play()">
-            <img class="button-img" src="./assets/SeeSay-Button-Play_v1.png"/>
-        </div>
-        <div class="record-button" (click)="upload()">
-            <img class="button-img" src="./assets/SeeSay-Button-Upload_v1.png"/>
-        </div>
-
-        <button (click)="toggleHistory()">
-            Toggle History
-        </button>
-        <div *ngIf="showHistory">
-            <h3>History</h3>
-            <ul>
-              <li *ngFor="let result of resultHistory">{{ result }}</li>
-            </ul>
-        </div>
-
-        <p>
-            {{ result ? result : 'Status: ' + status }}
+    <div class="body">
+        <div class="controls">
+            <section class="record">
+                <img class="tag" src="./assets/SeeSay-Tag-AudioFeature_v1.png"/>
+                <div class="record-button" (click)="record()">
+                    <img class="button-img" src="./assets/SeeSay-Button-Record_v1.png"/>
+                </div>
+                <div class="record-button" (click)="stop()">
+                    <img class="button-img" src="./assets/SeeSay-Button-Stop_v1.png"/>
+                </div>
+                <div class="record-button" (click)="play()">
+                    <img class="button-img" src="./assets/SeeSay-Button-Play_v1.png"/>
+                </div>
+                <div class="record-button" (click)="upload()">
+                    <img class="button-img" src="./assets/SeeSay-Button-Upload_v1.png"/>
+                </div>
         
-    </section>
-
-    <app-button>
-    </app-button>    
+                <button (click)="toggleHistory()">
+                    Toggle History
+                </button>
+                <div *ngIf="showHistory">
+                    <h3>History</h3>
+                    <ul>
+                      <li *ngFor="let result of resultHistory">{{ result }}</li>
+                    </ul>
+                </div>
+        
+                <p>
+                    {{ result ? result : 'Status: ' + status }}
+                
+            </section>
+        
+            <app-button>
+            </app-button>
+        </div>
+        <img class="videoFeed" src="./assets/SeeSay-SideArt_v1.png"/>
+    </div> 
 </div>

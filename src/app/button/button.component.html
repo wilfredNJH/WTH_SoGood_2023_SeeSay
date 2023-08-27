@@ -14,12 +14,12 @@
     </div>
   </div>
 
-  <video class="videoFeed" #videoElement width="60%" *ngIf="showVideo; else video_placeholder" muted></video>
+  <video class="videoFeed" #videoElement width="60%" *ngIf="showVideo" muted></video>
   <img class="capturedImage" *ngIf="imageSrc" [src]="imageSrc" alt="Captured Image" />  
   <p *ngIf="result!=''">{{result}}</p>
   <p *ngIf="uploadState=='uploading'">Uploading..</p>
 </section>
-
+<!-- 
 <ng-template #video_placeholder>
   <img src="./assets/SeeSay-SideArt_v1.png"/>
-</ng-template>
+</ng-template> -->

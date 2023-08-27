@@ -34,3 +34,12 @@
     width: 26em;
     margin-top: 4em;
 }
+
+.body{
+    display: flex;
+    flex-direction: row;
+}
+
+.videoFeed{
+    margin-left: auto;
+}
