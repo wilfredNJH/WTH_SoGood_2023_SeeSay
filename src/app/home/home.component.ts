@@ -6,6 +6,15 @@ import { catchError, retry } from 'rxjs/operators';
 
 import { API_URL } from "../app.constants"
 
+const UploadStates = {
+  UPLOADING: 'uploading',
+  UPLOADED: 'uploaded',
+  NONE: 'none',
+  ERROR: 'error'
+} as const;
+
+type UploadState = typeof UploadStates[keyof typeof UploadStates];
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -45,9 +54,10 @@ export class HomeComponent {
  
 
   upload() {
+    this.result = "Uploading.."; //hack
     const file = new File(this.audioChunks, 'audio.wav');
     this.http.post(API_URL + 'record', file).subscribe(data => {
-      this.result = (<any>data).text;
+      this.result = "Transcript: " + (<any>data).text;
       console.log(this.result);
   
       if (this.resultHistory.length === 0 || this.resultHistory[this.resultHistory.length - 1] !== this.result) {
