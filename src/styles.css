@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --body-width: 80%;
+    --button-width: 13.5em;
+    --tag-width: 15em;
+    --button-hover-scale: 1.075;
+}

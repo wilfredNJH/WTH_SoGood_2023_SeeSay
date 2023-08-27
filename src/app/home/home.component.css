@@ -6,7 +6,7 @@
     margin-bottom: 1em;
 
     > .tag{
-        width: 15em;
+        width: var(--tag-width);
     }
 
     > .record-button{
@@ -14,18 +14,18 @@
         margin-bottom: 0.75em;
 
         > .button-img{
-            width: 13.5em;
+            width: var(--button-width);
         }
     }
     
     >  .record-button:hover{
-        scale: 1.05;
+        scale: var(--button-hover-scale);
     }
 }
 
 .home{
     padding: 2em;
-    width: 80%;
+    width: var(--body-width);
     margin: auto;
 
 }

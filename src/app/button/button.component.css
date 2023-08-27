@@ -1,35 +1,27 @@
-.deon{
-  display: block;
+.deon {
+  >.imageControlButton {
+    width: fit-content;
 
-  > .imageControlButton{
-    display: inline-block;
-    margin-right: 1rem;
+    >img {
+      width: var(--button-width);
+    }
   }
 
-  padding: 1em;
+  >.imageControlButton:hover {
+    scale: var(--button-hover-scale);
+  }
 }
 
-.photoCapture{
+.photoCapture {
   margin: auto;
-  text-align: center;
+  width: var(--body-width);
 }
 
-.capturedImage{
+.capturedImage {
   width: 60%;
 }
 
-button{
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: white;
-  color: black;
-  font-weight: bold;
-}
-
-button:hover{
-  background-color: #dddddd;
-}
-
-img, video{
+img,
+video {
   border-radius: 1em;
 }

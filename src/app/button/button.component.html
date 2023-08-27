@@ -1,10 +1,11 @@
 <section class="photoCapture">
   <div class="deon">
-    <button class="imageControlButton" (click)="toggleCamera()">{{ showVideo ? 
-      'Turn Off Camera' : 'Turn On Camera' }}</button>
-    <button class="imageControlButton" *ngIf="showVideo" (click)="captureImage()">Capture Image</button>
-    <button class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">Download</button>
-    <button class="imageControlButton" *ngIf="imageCaptured" (click)="uploadImage()">Upload</button>
+    <div class="imageControlButton" (click)="toggleCamera()">
+      <img class="button-img" src="./assets/SeeSay-Button-Camera_v1.png"/>
+    </div>
+    <div class="imageControlButton" *ngIf="showVideo" (click)="captureImage()">Capture Image</div>
+    <div class="imageControlButton" *ngIf="imageCaptured" (click)="downloadImage()">Download</div>
+    <div class="imageControlButton" *ngIf="imageCaptured" (click)="uploadImage()">Upload</div>
   </div>
 
   <video #videoElement width="60%" *ngIf="showVideo" muted></video>
